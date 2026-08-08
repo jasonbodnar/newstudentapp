@@ -24,10 +24,13 @@ export default function Login({ personas, onLogin }) {
             <button className="sso-btn" onClick={() => { setProvider('ClassLink'); setStage('persona') }}>
               <span className="sso-mark sso-classlink">CL</span> Log in with ClassLink
             </button>
+            <button className="sso-btn" onClick={() => { setProvider('Google'); setStage('persona') }}>
+              <span className="sso-mark sso-google">G</span> Sign in with Google
+            </button>
             <p className="login-note">
-              StudentBridge lives inside your district's existing Clever or ClassLink portal — one click from the
-              dashboard staff already use every day. No new accounts, no new passwords. Rosters, schools,
-              and staff roles sync automatically from your SIS.
+              No new accounts, no new passwords. Sign in with whatever your district already uses —
+              the Clever or ClassLink portal tile, or your school Google account. Rosters, schools, and
+              staff roles always sync from your SIS, so everyone lands in the right place automatically.
             </p>
             <p className="login-note" style={{ marginTop: 8 }}>
               <b>Prototype demo</b> — sign-in is simulated and all student data is fictional.
@@ -42,8 +45,9 @@ export default function Login({ personas, onLogin }) {
               {provider} single sign-on <span className="pill ok">✓ Connected</span>
             </p>
             <p className="login-note" style={{ textAlign: 'left', marginBottom: 12 }}>
-              In production, {provider} tells StudentBridge who you are and what role you hold. For the demo,
-              choose a persona to see their view:
+              {provider === 'Google'
+                ? 'In production, Google verifies your school account, and StudentBridge matches it against district rostering to determine your role. For the demo, choose a persona to see their view:'
+                : `In production, ${provider} tells StudentBridge who you are and what role you hold. For the demo, choose a persona to see their view:`}
             </p>
             <div className="persona-list">
               {personas.map((p) => (
