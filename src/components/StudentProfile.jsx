@@ -130,12 +130,18 @@ function AssessmentsTab({ student }) {
       {a?.map?.length > 0 && (
         <div className="card" style={{ boxShadow: 'none' }}>
           <h3>NWEA MAP Growth (benchmark)</h3>
+          {a.nweaSyncedAt && (
+            <p className="card-sub">
+              <span className="pill teal">⟳ Auto-imported from NWEA</span>{' '}
+              Synced {a.nweaSyncedAt} via the district's NWEA data connection — no manual entry.
+            </p>
+          )}
           <table className="roster">
             <thead><tr><th>Term</th><th>Subject</th><th>RIT</th><th>Percentile</th></tr></thead>
             <tbody>
               {a.map.map((m, i) => (
                 <tr key={i}>
-                  <td>{m.term}</td><td>{m.subject}</td><td>{m.rit}</td>
+                  <td>{m.term}{m.source === 'nwea' && <span className="stu-meta" title="Imported automatically from NWEA"> ⟳</span>}</td><td>{m.subject}</td><td>{m.rit}</td>
                   <td><span className={`pill ${m.percentile >= 61 ? 'ok' : m.percentile >= 31 ? 'info' : 'warn'}`}>{m.percentile}th</span></td>
                 </tr>
               ))}

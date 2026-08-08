@@ -718,6 +718,43 @@ export const initialAuditLog = [
   },
 ]
 
+// ---------------------------------------------------------------------------
+// Simulated NWEA MAP Growth integration.
+// In production, StudentBridge connects to NWEA as an authorized data partner
+// (partner API / Comprehensive Data File / Ed-Fi) under the district's existing
+// data-sharing agreement, and results land on profiles automatically after each
+// testing window. These are the results "waiting in NWEA" for the demo's
+// one-click sync. Because the RIT scale is national, MAP history follows a
+// student across districts and states — including mid-year transfers.
+export const nweaPending = {
+  s06: {
+    // Omar's spring window results — the missing piece keeping him "pending"
+    rows: [
+      { term: 'Spring 2026', subject: 'Reading', rit: 199, percentile: 42, source: 'nwea' },
+      { term: 'Spring 2026', subject: 'Math', rit: 211, percentile: 74, source: 'nwea' },
+    ],
+    markComplete: true,
+    note: 'Spring 2026 window results',
+  },
+  s22: {
+    // Mateo tested with MAP in Dallas — same RIT scale, directly comparable
+    rows: [
+      { term: 'Fall 2025 (Dallas ISD)', subject: 'Reading', rit: 213, percentile: 52, source: 'nwea' },
+      { term: 'Fall 2025 (Dallas ISD)', subject: 'Math', rit: 207, percentile: 37, source: 'nwea' },
+    ],
+    markComplete: true,
+    note: 'Prior-district MAP history (both districts test with NWEA)',
+  },
+  s23: {
+    rows: [
+      { term: 'Fall 2025 (Orange County, FL)', subject: 'Reading', rit: 201, percentile: 48, source: 'nwea' },
+      { term: 'Fall 2025 (Orange County, FL)', subject: 'Math', rit: 199, percentile: 43, source: 'nwea' },
+    ],
+    markComplete: false, // paper records from FL still outstanding
+    note: 'Prior-district MAP history — arrived before her paper records did',
+  },
+}
+
 export const studentName = (s) => `${s.firstName} ${s.lastName}`
 
 export const profileStatusMeta = {

@@ -1,4 +1,4 @@
-import { schools, studentName } from '../data/demoData.js'
+import { schools, studentName, nweaPending } from '../data/demoData.js'
 import StudentTable from './StudentTable.jsx'
 import TransferChecklist from './TransferChecklist.jsx'
 
@@ -68,8 +68,70 @@ function TeacherHome({ user, students, onOpenStudent, onSendPacket }) {
   )
 }
 
+/* ------------------------- Connected data sources ------------------------- */
+function DataSourcesCard({ students, onSyncNwea }) {
+  const waiting = students.filter((s) => nweaPending[s.id] && !s.assessments?.nweaSyncedAt)
+  const lastSync = students
+    .map((s) => s.assessments?.nweaSyncedAt)
+    .filter(Boolean)
+    .sort()
+    .pop()
+
+  const Row = ({ icon, name, status, detail, action }) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--line)' }}>
+      <span style={{ fontSize: 20 }}>{icon}</span>
+      <div style={{ flex: 1 }}>
+        <span style={{ fontWeight: 700 }}>{name}</span> {status}
+        <div className="stu-meta">{detail}</div>
+      </div>
+      {action}
+    </div>
+  )
+
+  return (
+    <div className="card">
+      <h3>Connected assessment sources</h3>
+      <p className="card-sub">
+        Results flow onto profiles automatically — no hand-keying scores from PDFs. Connections run
+        under the district's existing data-sharing agreements.
+      </p>
+      <Row
+        icon="📈"
+        name="NWEA MAP Growth"
+        status={<span className="pill ok">Connected</span>}
+        detail={
+          waiting.length
+            ? `${waiting.length} student${waiting.length > 1 ? 's have' : ' has'} new results waiting: ${waiting.map(studentName).join(', ')}`
+            : `Up to date${lastSync ? ` — last synced ${lastSync}` : ''}. Auto-syncs after each testing window; MAP history follows transfers across districts because the RIT scale is national.`
+        }
+        action={
+          waiting.length ? (
+            <button className="btn primary small" onClick={onSyncNwea}>Sync now ({waiting.length})</button>
+          ) : (
+            <span className="pill ok">✓ Synced</span>
+          )
+        }
+      />
+      <Row
+        icon="🏛️"
+        name="M-STEP (state assessment)"
+        status={<span className="pill ok">Connected</span>}
+        detail="Imported from the state data hub each fall when results release."
+        action={<span className="pill ok">✓ Current</span>}
+      />
+      <Row
+        icon="🧩"
+        name="i-Ready · STAR · DIBELS"
+        status={<span className="pill todo">Not connected</span>}
+        detail="Additional benchmark sources available if your district uses them."
+        action={<span className="stu-meta">Contact admin</span>}
+      />
+    </div>
+  )
+}
+
 /* ------------------------- Counselor home ------------------------- */
-function CounselorHome({ user, students, onOpenStudent, onMarkStep }) {
+function CounselorHome({ user, students, onOpenStudent, onMarkStep, onSyncNwea }) {
   const incoming = students.filter((s) => s.cohort === 'incoming')
   const midyear = students.filter((s) => s.cohort === 'midyear-in')
   const outgoing = students.filter((s) => s.cohort === 'outgoing')
@@ -93,6 +155,8 @@ function CounselorHome({ user, students, onOpenStudent, onMarkStep }) {
         <div className="stat accent-amber"><div className="v">{needsAttention.length}</div><div className="l">Mid-year transfers in progress</div></div>
         <div className="stat accent-red"><div className="v">{outgoing.filter((s) => s.packetStatus !== 'sent').length}</div><div className="l">Outgoing packets not yet sent</div></div>
       </div>
+
+      <DataSourcesCard students={students} onSyncNwea={onSyncNwea} />
 
       {needsAttention.length > 0 && (
         <div className="card">

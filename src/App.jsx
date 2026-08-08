@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { initialStudents, initialAuditLog, personas, studentName } from './data/demoData.js'
+import { initialStudents, initialAuditLog, personas, studentName, nweaPending } from './data/demoData.js'
 import Login from './components/Login.jsx'
 import Layout from './components/Layout.jsx'
 import Dashboard from './components/Dashboard.jsx'
@@ -140,6 +140,40 @@ export default function App() {
     showToast(`${labels[stepKey] || 'Updated'} — ${studentName(s)}`)
   }
 
+  const syncNwea = () => {
+    const today = new Date().toISOString().slice(0, 10)
+    const affected = students.filter((s) => nweaPending[s.id] && !s.assessments?.nweaSyncedAt)
+    if (!affected.length) {
+      showToast('NWEA MAP Growth — already up to date')
+      return
+    }
+    setStore((s) => ({
+      ...s,
+      students: s.students.map((st) => {
+        const pending = nweaPending[st.id]
+        if (!pending || st.assessments?.nweaSyncedAt) return st
+        return {
+          ...st,
+          assessments: {
+            ...st.assessments,
+            status: pending.markComplete ? 'complete' : st.assessments.status,
+            map: [...(st.assessments.map || []), ...pending.rows],
+            nweaSyncedAt: today,
+          },
+        }
+      }),
+    }))
+    affected.forEach((st) => {
+      addLog({
+        user: userLabel(user),
+        action: 'Assessment data imported',
+        student: studentName(st),
+        detail: `NWEA MAP Growth API sync — ${nweaPending[st.id].note}. School-official vendor integration; no manual entry.`,
+      })
+    })
+    showToast(`NWEA sync complete — MAP results imported for ${affected.length} student${affected.length > 1 ? 's' : ''} ✓`)
+  }
+
   const resetDemo = () => {
     localStorage.removeItem(STORE_KEY)
     setStore({ students: initialStudents, auditLog: initialAuditLog })
@@ -171,6 +205,7 @@ export default function App() {
           onOpenStudent={openStudent}
           onSendPacket={sendPacket}
           onMarkStep={markTransferStep}
+          onSyncNwea={syncNwea}
         />
       )}
       {route.view === 'student' && selectedStudent && (
