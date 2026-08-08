@@ -1,8 +1,8 @@
-# StudentBridge — Student Transition Profiles
+# HandRail — Student Transition Profiles
 
-**Every new student arrives with a story. StudentBridge makes sure their new school knows it.**
+**Every new student arrives with a story. HandRail makes sure their new school knows it.**
 
-StudentBridge is a prototype web app for intentional student transitions between schools: grade-level
+HandRail is a prototype web app for intentional student transitions between schools: grade-level
 moves (elementary → intermediate → middle), and — the hardest case — mid-year transfers. It is
 designed to live *inside* Clever or ClassLink, using the rostering, SSO, and district trust that
 already exist in EdTech rather than building yet another standalone system.
@@ -22,7 +22,7 @@ Demo scenario: **Riverside Intermediate School** (grades 5–6, Michigan) receiv
 
 Four personas (choose at the simulated Clever/ClassLink login):
 
-| Persona | Role | What they do in StudentBridge |
+| Persona | Role | What they do in HandRail |
 |---|---|---|
 | Ms. Alvarez | 4th-grade teacher (sending) | Completes a ~7-minute transition profile per student: reading/math/writing levels, work habits, strengths, and "what works for this student" |
 | Mrs. Kowalski | 6th-grade teacher (sending) | Same, for 6th graders leaving for middle school; sends transition packets |
@@ -37,7 +37,7 @@ Key features:
 - **Student voice** — students complete a short "About Me" survey from their own Clever/ClassLink login (how they feel about the move, what excites or worries them, what they want their new teachers to know, how they learn best). Their answers appear on the profile in a Student Voice tab and on the overview. Log in as Malik to see the student experience.
 - **Two-week check-ins** — scheduled automatically two weeks after a new student's first day. One tap from the portal tile, under a minute to answer (how school is going, friends at lunch, how classes feel, optional note to an adult). Responses route to the homeroom teacher and counselor; concerning answers are flagged for follow-up on the counselor dashboard. Log in as Destiny to answer one; Mateo's flagged check-in shows the staff side.
 - **Mid-year transfer workflow** — a five-step checklist (enroll → request records → receive → profile → placement ready) with FERPA basis noted at each step.
-- **Out-of-state standards comparison** — when a student arrives from TX/FL/OH/IN, StudentBridge shows how that state's standards differ from Michigan's: what the student may not have seen, where they may be ahead, and terminology differences. *A standards gap is not a skills gap.*
+- **Out-of-state standards comparison** — when a student arrives from TX/FL/OH/IN, HandRail shows how that state's standards differ from Michigan's: what the student may not have seen, where they may be ahead, and terminology differences. *A standards gap is not a skills gap.*
 - **FERPA by design** — transfer exception (§99.31(a)(2)) and school-officials exception (§99.31(a)(1)) built into the flows; restricted tier for IEP/504/EL detail; a complete access & disclosure log.
 
 All data is fictional. State persists in `localStorage`; use "reset demo data" in the footer to start over.
@@ -45,7 +45,7 @@ All data is fictional. State persists in `localStorage`; use "reset demo data" i
 ## Why Clever / ClassLink
 
 - **Zero new accounts**: staff SSO from the portal they already open daily; roles and rosters sync from the SIS (Clever Secure Sync / ClassLink OneRoster).
-- **District trust & procurement**: districts already vet and buy through these ecosystems; StudentBridge fits as an app in the Clever Library / ClassLink App Store, or as an acquisition-ready add-on.
+- **District trust & procurement**: districts already vet and buy through these ecosystems; HandRail fits as an app in the Clever Library / ClassLink App Store, or as an acquisition-ready add-on.
 - **Cross-district transfers**: both networks cover a large majority of U.S. districts, which is what makes sending a packet to *another district* feasible — the receiving school is probably on one of them.
 
 ## Running locally

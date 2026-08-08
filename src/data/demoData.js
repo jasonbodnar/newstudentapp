@@ -625,7 +625,7 @@ export const initialStudents = [
     },
     teacherProfile: {
       status: 'complete',
-      completedBy: 'Sending teacher (Whitmer Elem., via StudentBridge exchange)',
+      completedBy: 'Sending teacher (Whitmer Elem., via HandRail exchange)',
       completedDate: '2026-01-15',
       reading: {
         level: 'DRA 40 / ~Lexile 650L (at grade level)',
@@ -791,7 +791,7 @@ export const initialAuditLog = [
 
 // ---------------------------------------------------------------------------
 // Simulated NWEA MAP Growth integration.
-// In production, StudentBridge connects to NWEA as an authorized data partner
+// In production, HandRail connects to NWEA as an authorized data partner
 // (partner API / Comprehensive Data File / Ed-Fi) under the district's existing
 // data-sharing agreement, and results land on profiles automatically after each
 // testing window. These are the results "waiting in NWEA" for the demo's

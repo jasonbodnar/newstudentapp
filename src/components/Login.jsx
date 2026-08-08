@@ -8,12 +8,13 @@ export default function Login({ personas, onLogin }) {
     <div className="login-wrap">
       <div className="login-card">
         <div className="logo-big">
-          <span className="mark">🌉</span>
-          <h1>StudentBridge</h1>
+          <span className="mark">🤝</span>
+          <h1>HandRail</h1>
         </div>
         <p className="tag">
-          Every new student arrives with a story. StudentBridge makes sure their new school knows it — grades,
-          academic levels, state testing, and what actually works for them in a classroom.
+          Something to hold onto on the way to a new school. HandRail carries every student's story —
+          grades, academic levels, state testing, and what actually works for them in a classroom — so
+          no one starts over as a stranger.
         </p>
 
         {stage === 'sso' && (
@@ -46,8 +47,8 @@ export default function Login({ personas, onLogin }) {
             </p>
             <p className="login-note" style={{ textAlign: 'left', marginBottom: 12 }}>
               {provider === 'Google'
-                ? 'In production, Google verifies your school account, and StudentBridge matches it against district rostering to determine your role. For the demo, choose a persona to see their view:'
-                : `In production, ${provider} tells StudentBridge who you are and what role you hold. For the demo, choose a persona to see their view:`}
+                ? 'In production, Google verifies your school account, and HandRail matches it against district rostering to determine your role. For the demo, choose a persona to see their view:'
+                : `In production, ${provider} tells HandRail who you are and what role you hold. For the demo, choose a persona to see their view:`}
             </p>
             <div className="persona-list">
               {personas.map((p) => (

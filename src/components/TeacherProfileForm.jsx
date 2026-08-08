@@ -127,7 +127,7 @@ export default function TeacherProfileForm({ student, onSave, onCancel }) {
                 onChange={(e) => set('growthAreas', e.target.value)} />
             </div>
             <div className="form-row">
-              <label>What works for this student * <span className="hint">(the single most valuable field in StudentBridge)</span></label>
+              <label>What works for this student * <span className="hint">(the single most valuable field in HandRail)</span></label>
               <textarea value={form.whatWorks} placeholder="Seating, routines, motivators, things to avoid — the practical playbook."
                 onChange={(e) => set('whatWorks', e.target.value)} />
             </div>
