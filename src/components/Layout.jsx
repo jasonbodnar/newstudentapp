@@ -14,7 +14,7 @@ export default function Layout({ user, route, onNav, onSignOut, onReset, childre
         Prototype demo — all students, scores, and notes are fictional. No real student records are stored.
       </div>
       <header className="topbar">
-        <div className="logo"><span className="mark">🌉</span> Bridge</div>
+        <div className="logo"><span className="mark">🌉</span> StudentBridge</div>
         <nav>
           {navItems.map((n) => (
             <button
@@ -37,7 +37,7 @@ export default function Layout({ user, route, onNav, onSignOut, onReset, childre
       </header>
       <main className="main">{children}</main>
       <div className="footer-note">
-        Bridge prototype · runs inside Clever / ClassLink · demo data only ·{' '}
+        StudentBridge prototype · runs inside Clever / ClassLink · demo data only ·{' '}
         <a href="#reset" onClick={(e) => { e.preventDefault(); onReset() }}>reset demo data</a>
       </div>
     </div>

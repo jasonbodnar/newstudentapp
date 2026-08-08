@@ -5,7 +5,7 @@ export default function FerpaPage({ user, auditLog }) {
     <>
       <h1 className="page-title">Privacy &amp; FERPA</h1>
       <p className="page-sub">
-        Bridge moves education records between schools — which is exactly what FERPA regulates. The
+        StudentBridge moves education records between schools — which is exactly what FERPA regulates. The
         product is designed so that using it normally <i>is</i> using it compliantly.
       </p>
 
@@ -14,7 +14,7 @@ export default function FerpaPage({ user, auditLog }) {
           <h3>Why no parent consent form is required</h3>
           <p style={{ fontSize: 14 }}>
             FERPA generally requires written consent to share education records — but it provides specific
-            exceptions that Bridge is built around:
+            exceptions that StudentBridge is built around:
           </p>
           <div className="note-block">
             <div className="nb-label">§99.31(a)(2) — Transfer exception</div>
@@ -27,13 +27,13 @@ export default function FerpaPage({ user, auditLog }) {
           <div className="note-block">
             <div className="nb-label">§99.31(a)(1) — School officials</div>
             Within a school, staff may access records when they have a <b>legitimate educational
-            interest</b>. Bridge enforces this in software: teachers see their own students; support-plan
+            interest</b>. StudentBridge enforces this in software: teachers see their own students; support-plan
             details are limited to counselors, admins, and assigned staff.
           </div>
           <div className="note-block">
             <div className="nb-label">School-official vendor status</div>
-            Bridge (like Clever and ClassLink themselves) operates as a "school official" under contract:
-            the district owns the data, Bridge uses it only for the contracted purpose, never sells it or
+            StudentBridge (like Clever and ClassLink themselves) operates as a "school official" under contract:
+            the district owns the data, StudentBridge uses it only for the contracted purpose, never sells it or
             uses it for advertising, and deletes it at contract end — consistent with FERPA, Michigan
             student-privacy law, and the Student Privacy Pledge.
           </div>
@@ -47,7 +47,7 @@ export default function FerpaPage({ user, auditLog }) {
             <li><b>Restricted tiers.</b> IEP/504/EL detail is visible only to staff with a direct need; other staff see that a plan exists and who to contact.</li>
             <li><b>Complete audit log.</b> Every view and every disclosure is recorded (who, what, when, under which FERPA basis) — see below. This is also the district's evidence trail for a parent or state audit.</li>
             <li><b>Professional-language guidance.</b> Teacher inputs are structured and framed as part of the education record, which parents may inspect — the form itself coaches factual, strengths-based language.</li>
-            <li><b>No student login.</b> Only rostered staff can access Bridge; students and families never see other students' data. A future parent portal would show parents only their own child's packet.</li>
+            <li><b>No student login.</b> Only rostered staff can access StudentBridge; students and families never see other students' data. A future parent portal would show parents only their own child's packet.</li>
           </ul>
         </div>
       </div>

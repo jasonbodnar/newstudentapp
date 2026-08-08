@@ -9,10 +9,10 @@ export default function Login({ personas, onLogin }) {
       <div className="login-card">
         <div className="logo-big">
           <span className="mark">🌉</span>
-          <h1>Bridge</h1>
+          <h1>StudentBridge</h1>
         </div>
         <p className="tag">
-          Every new student arrives with a story. Bridge makes sure their new school knows it — grades,
+          Every new student arrives with a story. StudentBridge makes sure their new school knows it — grades,
           academic levels, state testing, and what actually works for them in a classroom.
         </p>
 
@@ -25,7 +25,7 @@ export default function Login({ personas, onLogin }) {
               <span className="sso-mark sso-classlink">CL</span> Log in with ClassLink
             </button>
             <p className="login-note">
-              Bridge lives inside your district's existing Clever or ClassLink portal — one click from the
+              StudentBridge lives inside your district's existing Clever or ClassLink portal — one click from the
               dashboard staff already use every day. No new accounts, no new passwords. Rosters, schools,
               and staff roles sync automatically from your SIS.
             </p>
@@ -42,7 +42,7 @@ export default function Login({ personas, onLogin }) {
               {provider} single sign-on <span className="pill ok">✓ Connected</span>
             </p>
             <p className="login-note" style={{ textAlign: 'left', marginBottom: 12 }}>
-              In production, {provider} tells Bridge who you are and what role you hold. For the demo,
+              In production, {provider} tells StudentBridge who you are and what role you hold. For the demo,
               choose a persona to see their view:
             </p>
             <div className="persona-list">

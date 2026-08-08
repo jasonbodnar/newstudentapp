@@ -70,7 +70,8 @@ function TeacherProfileView({ profile }) {
 
       <div className="fieldset mt12">
         <div className="fs-title">⭐ The student behind the data</div>
-        {profile.strengths && <div className="note-block" style={{ marginTop: 0 }}><div className="nb-label">Strengths</div>{profile.strengths}</div>}
+        {profile.interests && <div className="note-block" style={{ marginTop: 0, borderLeftColor: 'var(--amber)' }}><div className="nb-label">Passions &amp; interests</div>{profile.interests}</div>}
+        {profile.strengths && <div className="note-block"><div className="nb-label">Strengths</div>{profile.strengths}</div>}
         {profile.growthAreas && <div className="note-block"><div className="nb-label">Growth areas</div>{profile.growthAreas}</div>}
         {profile.whatWorks && <div className="note-block" style={{ borderLeftColor: 'var(--teal)' }}><div className="nb-label">What works for this student</div>{profile.whatWorks}</div>}
       </div>
@@ -255,6 +256,12 @@ export default function StudentProfile({ student, user, initialTab, onBack, onSa
             <div className="kv"><div className="k">Assessments</div><div className="v">{student.assessments?.status === 'complete' ? <span className="pill ok">Attached</span> : <span className="pill warn">Pending</span>}</div></div>
             {student.assessments?.attendance && <div className="kv"><div className="k">Attendance</div><div className="v">{student.assessments.attendance.rate}%</div></div>}
           </div>
+          {student.teacherProfile?.status === 'complete' && student.teacherProfile.interests && (
+            <div className="note-block mt12" style={{ borderLeftColor: 'var(--amber)' }}>
+              <div className="nb-label">Passions &amp; interests</div>
+              {student.teacherProfile.interests}
+            </div>
+          )}
           {student.teacherProfile?.status === 'complete' && student.teacherProfile.whatWorks && (
             <div className="note-block mt12" style={{ borderLeftColor: 'var(--teal)' }}>
               <div className="nb-label">What works for {student.firstName} — from {student.teacherProfile.completedBy}</div>

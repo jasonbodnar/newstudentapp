@@ -123,6 +123,7 @@ export const initialStudents = [
           'Writes well-organized paragraphs with strong voice. Working on revising rather than "one-and-done" drafts.',
       },
       workHabits: { organization: 4, focus: 4, independence: 4, participation: 3 },
+      interests: 'Greek mythology (thanks, Percy Jackson), soccer, and creative writing — she runs a lunchtime story club.',
       strengths: 'Curious, self-directed, strong leader in small groups.',
       growthAreas: 'Can be reluctant to share in whole-class discussion.',
       whatWorks:
@@ -175,6 +176,7 @@ export const initialStudents = [
         notes: 'Great ideas, but getting them on paper is effortful. Graphic organizers help a lot.',
       },
       workHabits: { organization: 2, focus: 3, independence: 3, participation: 4 },
+      interests: 'Basketball above all — knows every Pistons stat. Also loves cooking with his grandmother.',
       strengths: 'Positive, resilient, great sense of humor, strong mental math.',
       growthAreas: 'Organization — desk, folder, and backpack systems need external structure.',
       whatWorks:
@@ -230,6 +232,7 @@ export const initialStudents = [
       },
       writing: { notes: 'Concise and accurate; working on elaboration and detail.' },
       workHabits: { organization: 4, focus: 4, independence: 4, participation: 2 },
+      interests: 'Space and astronomy, origami, and chess — taught half the class to play this year.',
       strengths: 'Exceptional quantitative reasoning; meticulous work.',
       growthAreas: 'Very quiet — will not ask for help even when she needs it.',
       whatWorks:
@@ -281,6 +284,7 @@ export const initialStudents = [
       },
       writing: { notes: 'Dictation and speech-to-text unlock much stronger ideas than handwriting shows.' },
       workHabits: { organization: 3, focus: 2, independence: 2, participation: 3 },
+      interests: 'Anything with an engine — dirt bikes, tractors, how things work. Also fishing with his dad and LEGO builds.',
       strengths: 'Kind, hard-working, mechanically gifted — the class expert on anything hands-on.',
       growthAreas: 'Confidence. He shuts down if he feels singled out about reading.',
       whatWorks:
@@ -400,6 +404,7 @@ export const initialStudents = [
       },
       writing: { notes: 'Excellent essayist; cite-evidence habits are well established.' },
       workHabits: { organization: 3, focus: 4, independence: 4, participation: 4 },
+      interests: 'Theater (lead in the spring musical), historical fiction, and debate — she watches mock trial videos for fun.',
       strengths: 'Debate-team ready — articulate and well-read.',
       growthAreas: 'Perfectionism; can spiral on timed tasks.',
       whatWorks: 'Clear rubrics up front. Remind her a first draft is allowed to be rough.',
@@ -450,6 +455,7 @@ export const initialStudents = [
       },
       writing: { notes: 'Improving. Needs sentence starters and structure for longer pieces.' },
       workHabits: { organization: 2, focus: 3, independence: 2, participation: 3 },
+      interests: 'Soccer and FIFA, sneaker design — he sketches custom shoes in his free time and knows the whole history of Air Jordans.',
       strengths: 'Great teammate, natural mentor to younger students, strong verbal reasoning.',
       growthAreas: 'Math confidence and homework completion.',
       whatWorks:
@@ -566,7 +572,7 @@ export const initialStudents = [
     },
     teacherProfile: {
       status: 'complete',
-      completedBy: 'Sending teacher (Whitmer Elem., via Bridge exchange)',
+      completedBy: 'Sending teacher (Whitmer Elem., via StudentBridge exchange)',
       completedDate: '2026-01-15',
       reading: {
         level: 'DRA 40 / ~Lexile 650L (at grade level)',
@@ -582,6 +588,7 @@ export const initialStudents = [
       },
       writing: { notes: 'Organized writer, loves personal narrative.' },
       workHabits: { organization: 3, focus: 3, independence: 3, participation: 3 },
+      interests: 'Art (especially manga-style drawing), volleyball, and animals — she volunteers at a shelter and wants to be a vet.',
       strengths: 'Adapts quickly, makes friends easily, strong self-advocate.',
       growthAreas: 'This is her third school in three years — watch for gaps from moving mid-unit.',
       whatWorks: 'A buddy on day one and a predictable routine. She will tell you what she needs if you ask.',

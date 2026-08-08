@@ -2,7 +2,7 @@
   "name": "newstudentapp",
   "private": true,
   "version": "0.1.0",
-  "description": "Bridge — student transition profiles for schools, built on Clever/ClassLink rostering",
+  "description": "StudentBridge — student transition profiles for schools, built on Clever/ClassLink rostering",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -27,6 +27,7 @@ export default function TeacherProfileForm({ student, onSave, onCancel }) {
     math: { fluency: 0, problemSolving: 0, notes: '', ...(existing?.math || {}) },
     writing: { notes: '', ...(existing?.writing || {}) },
     workHabits: { organization: 0, focus: 0, independence: 0, participation: 0, ...(existing?.workHabits || {}) },
+    interests: existing?.interests || '',
     strengths: existing?.strengths || '',
     growthAreas: existing?.growthAreas || '',
     whatWorks: existing?.whatWorks || '',
@@ -111,6 +112,11 @@ export default function TeacherProfileForm({ student, onSave, onCancel }) {
           <div className="fs-title">⭐ The student behind the data</div>
           <div className="form-grid">
             <div className="form-row">
+              <label>Passions &amp; interests <span className="hint">(the fastest way for a new teacher to connect on day one)</span></label>
+              <textarea value={form.interests} placeholder="What lights this student up? Sports, animals, art, gaming, music, robotics, a topic they can't stop talking about…"
+                onChange={(e) => set('interests', e.target.value)} />
+            </div>
+            <div className="form-row">
               <label>Strengths</label>
               <textarea value={form.strengths} placeholder="What is this student great at — academically or otherwise?"
                 onChange={(e) => set('strengths', e.target.value)} />
@@ -121,7 +127,7 @@ export default function TeacherProfileForm({ student, onSave, onCancel }) {
                 onChange={(e) => set('growthAreas', e.target.value)} />
             </div>
             <div className="form-row">
-              <label>What works for this student * <span className="hint">(the single most valuable field in Bridge)</span></label>
+              <label>What works for this student * <span className="hint">(the single most valuable field in StudentBridge)</span></label>
               <textarea value={form.whatWorks} placeholder="Seating, routines, motivators, things to avoid — the practical playbook."
                 onChange={(e) => set('whatWorks', e.target.value)} />
             </div>

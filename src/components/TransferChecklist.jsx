@@ -2,7 +2,7 @@ const STEP_DEFS = [
   {
     key: 'enrolled',
     label: 'Student enrolled',
-    note: 'Family completed enrollment. Student appears in the SIS and syncs to Bridge via Clever/ClassLink rostering.',
+    note: 'Family completed enrollment. Student appears in the SIS and syncs to StudentBridge via Clever/ClassLink rostering.',
   },
   {
     key: 'recordsRequested',
@@ -17,7 +17,7 @@ const STEP_DEFS = [
   {
     key: 'profileReceived',
     label: 'Transition profile received or built',
-    note: 'If the sending school uses Bridge, their teacher profile arrives digitally. Otherwise the counselor builds one from records + a quick call to the sending school.',
+    note: 'If the sending school uses StudentBridge, their teacher profile arrives digitally. Otherwise the counselor builds one from records + a quick call to the sending school.',
   },
   {
     key: 'placementReady',
