@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import LogoMark from './LogoMark.jsx'
 
 export default function Login({ personas, onLogin }) {
   const [stage, setStage] = useState('sso') // 'sso' → 'persona'
@@ -8,7 +9,7 @@ export default function Login({ personas, onLogin }) {
     <div className="login-wrap">
       <div className="login-card">
         <div className="logo-big">
-          <span className="mark">🤝</span>
+          <span className="mark"><LogoMark size={30} /></span>
           <h1>HandRail</h1>
         </div>
         <p className="tag">

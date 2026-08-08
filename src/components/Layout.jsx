@@ -1,4 +1,5 @@
 import { schools } from '../data/demoData.js'
+import LogoMark from './LogoMark.jsx'
 
 export default function Layout({ user, route, onNav, onSignOut, onReset, children }) {
   const navItems = user.role === 'student' ? [] : [
@@ -14,7 +15,7 @@ export default function Layout({ user, route, onNav, onSignOut, onReset, childre
         Prototype demo — all students, scores, and notes are fictional. No real student records are stored.
       </div>
       <header className="topbar">
-        <div className="logo"><span className="mark">🤝</span> HandRail</div>
+        <div className="logo"><span className="mark"><LogoMark size={22} /></span> HandRail</div>
         <nav>
           {navItems.map((n) => (
             <button
