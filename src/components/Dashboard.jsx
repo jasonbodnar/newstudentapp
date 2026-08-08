@@ -297,8 +297,8 @@ function AdminHome({ students, auditLog, onOpenStudent }) {
       </div>
 
       <div className="card mt16">
-        <h3>Recent FERPA access log</h3>
-        <p className="card-sub">Every profile view and disclosure is recorded. Full log under Privacy &amp; FERPA.</p>
+        <h3>Recent disclosure-log activity</h3>
+        <p className="card-sub">Every profile view and disclosure is recorded. Full log under Disclosure Log.</p>
         {auditLog.slice(0, 6).map((e, i) => (
           <div key={i} className="audit-item">
             <div className="ts">{e.ts}</div>

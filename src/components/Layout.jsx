@@ -4,7 +4,7 @@ export default function Layout({ user, route, onNav, onSignOut, onReset, childre
   const navItems = [
     { key: 'home', label: 'Home' },
     { key: 'standards', label: 'Standards Comparison' },
-    { key: 'ferpa', label: 'Privacy & FERPA' },
+    { key: 'ferpa', label: 'Disclosure Log' },
   ]
   const school = schools[user.school]
 
@@ -39,6 +39,14 @@ export default function Layout({ user, route, onNav, onSignOut, onReset, childre
       <div className="footer-note">
         StudentBridge prototype · runs inside Clever / ClassLink · demo data only ·{' '}
         <a href="#reset" onClick={(e) => { e.preventDefault(); onReset() }}>reset demo data</a>
+        <br />
+        {/* Replace these hrefs with the Termly policy URLs once published */}
+        <a href="#privacy" onClick={(e) => e.preventDefault()}>Privacy Policy</a>
+        {' · '}
+        <a href="#terms" onClick={(e) => e.preventDefault()}>Terms of Use</a>
+        {' · '}
+        <a href="#cookies" onClick={(e) => e.preventDefault()}>Cookie Policy</a>
+        <span className="stu-meta"> (coming soon)</span>
       </div>
     </div>
   )

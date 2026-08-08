@@ -4,7 +4,7 @@ import Login from './components/Login.jsx'
 import Layout from './components/Layout.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import StudentProfile from './components/StudentProfile.jsx'
-import FerpaPage from './components/FerpaPage.jsx'
+import DisclosureLog from './components/DisclosureLog.jsx'
 import StandardsExplorer from './components/StandardsExplorer.jsx'
 
 const STORE_KEY = 'bridge-demo-v1'
@@ -219,7 +219,7 @@ export default function App() {
           onMarkStep={markTransferStep}
         />
       )}
-      {route.view === 'ferpa' && <FerpaPage user={user} auditLog={auditLog} />}
+      {route.view === 'ferpa' && <DisclosureLog user={user} auditLog={auditLog} />}
       {route.view === 'standards' && <StandardsExplorer />}
       {toast && <div className="toast">{toast}</div>}
     </Layout>
