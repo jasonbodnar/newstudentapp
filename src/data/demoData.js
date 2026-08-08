@@ -72,6 +72,17 @@ export const personas = [
       'Student view — a 4th grader at Maple headed to Riverside. Completes a short "About Me" survey that becomes part of his transition profile.',
   },
   {
+    id: 'destiny',
+    name: 'Destiny',
+    fullName: 'Destiny Carver',
+    role: 'student',
+    roleLabel: 'Student',
+    school: 'riverside',
+    studentId: 's21',
+    description:
+      'Student view — a 5th grader who transferred to Riverside mid-year. Her two-week check-in is due: one tap from her portal tile, a few quick questions.',
+  },
+  {
     id: 'patel',
     name: 'Dr. Patel',
     fullName: 'Sunita Patel',
@@ -591,6 +602,7 @@ export const initialStudents = [
     toSchool: 'riverside',
     homeroom: 'Unassigned',
     enrolledDate: '2026-01-12',
+    checkIn: { dueDate: '2026-01-26', status: 'due' },
     studentVoice: {
       completedDate: '2026-01-22',
       feeling: 3,
@@ -661,6 +673,17 @@ export const initialStudents = [
     homeroom: 'Unassigned',
     enrolledDate: '2026-02-03',
     priorState: 'TX',
+    checkIn: {
+      dueDate: '2026-02-17',
+      status: 'completed',
+      completedDate: '2026-02-19',
+      responses: {
+        overall: 2,
+        friends: 'Not yet',
+        classes: 'Too hard',
+        adultNote: "Math is really different here. I don't want to ask questions in front of everyone.",
+      },
+    },
     transfer: {
       steps: {
         enrolled: { done: true, date: '2026-02-03' },
@@ -749,6 +772,13 @@ export const initialAuditLog = [
     action: 'Records request sent',
     student: 'Brianna Sokolov',
     detail: 'Request to Pine Trails Elementary (Orlando, FL) — FERPA transfer exception, no consent required',
+  },
+  {
+    ts: '2026-02-19 15:12',
+    user: 'Mateo Vega (Student)',
+    action: 'Two-week check-in completed',
+    student: 'Mateo Vega',
+    detail: 'Responses flagged for follow-up — routed to homeroom teacher and counselor automatically',
   },
   {
     ts: '2026-02-10 08:30',

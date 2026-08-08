@@ -21,6 +21,26 @@ export const LEARN_OPTIONS = [
 
 export const SUBJECT_OPTIONS = ['Reading', 'Writing', 'Math', 'Science', 'Social Studies', 'Art', 'Music', 'PE']
 
+/* ---------- two-week check-in ---------- */
+
+export const CHECKIN_OVERALL = {
+  4: { emoji: '😄', label: 'Great!' },
+  3: { emoji: '🙂', label: 'Pretty good' },
+  2: { emoji: '😐', label: 'Okay, I guess' },
+  1: { emoji: '😟', label: 'Not so good' },
+}
+
+export function checkInFlags(responses) {
+  if (!responses) return []
+  const flags = []
+  if (responses.overall <= 2) flags.push('Not feeling good about school yet')
+  if (responses.friends === 'Not yet') flags.push('No friend group yet')
+  if (responses.classes === 'Too hard') flags.push('Classes feel too hard')
+  if (responses.classes === 'Too easy') flags.push('Classes feel too easy')
+  if (responses.adultNote?.trim()) flags.push('Left a note for an adult')
+  return flags
+}
+
 /* ---------- read-only view, shown to staff on the profile ---------- */
 export function StudentVoiceView({ student }) {
   const v = student.studentVoice
@@ -58,6 +78,140 @@ export function StudentVoiceView({ student }) {
       {v.teachersShouldKnow && <div className="note-block" style={{ borderLeftColor: 'var(--brand)' }}><div className="nb-label">What I want my new teachers to know</div>{v.teachersShouldKnow}</div>}
       {v.proudOf && <div className="note-block" style={{ borderLeftColor: 'var(--violet)' }}><div className="nb-label">Something I'm proud of</div>{v.proudOf}</div>}
     </>
+  )
+}
+
+/* ---------- check-in results, shown to staff on the profile ---------- */
+export function CheckInView({ student }) {
+  const c = student.checkIn
+  if (!c) {
+    return (
+      <div className="empty" style={{ paddingTop: 8, paddingBottom: 8 }}>
+        No check-in scheduled yet. Check-ins are queued automatically two weeks after a student's first
+        day at their new school.
+      </div>
+    )
+  }
+  if (c.status !== 'completed') {
+    return (
+      <div className="callout warn" style={{ marginBottom: 0 }}>
+        <b>Check-in due.</b> Scheduled {c.dueDate} (two weeks after the first day). The student answers
+        from their own portal tile — one tap, under a minute.
+      </div>
+    )
+  }
+  const r = c.responses
+  const flags = checkInFlags(r)
+  const o = CHECKIN_OVERALL[r.overall]
+  return (
+    <>
+      {flags.length > 0 && (
+        <div className="callout warn">
+          <b>⚑ Flagged for follow-up:</b> {flags.join(' · ')}. Routed to the homeroom teacher and
+          counselor automatically.
+        </div>
+      )}
+      <div className="kv-grid" style={{ marginBottom: 12 }}>
+        <div className="kv">
+          <div className="k">How school is going</div>
+          <div className="v">{o ? `${o.emoji} ${o.label}` : '—'}</div>
+        </div>
+        <div className="kv">
+          <div className="k">Friends to sit with at lunch?</div>
+          <div className="v">{r.friends || '—'}</div>
+        </div>
+        <div className="kv">
+          <div className="k">How the classes feel</div>
+          <div className="v">{r.classes || '—'}</div>
+        </div>
+      </div>
+      {r.adultNote && (
+        <div className="note-block" style={{ borderLeftColor: 'var(--amber)' }}>
+          <div className="nb-label">Note for a teacher or counselor</div>
+          {r.adultNote}
+        </div>
+      )}
+      <p className="stu-meta" style={{ marginTop: 8 }}>Completed {c.completedDate}</p>
+    </>
+  )
+}
+
+/* ---------- the check-in itself, shown to the logged-in student ---------- */
+export function CheckInSurveyPage({ student, onSave }) {
+  const [saved, setSaved] = useState(false)
+  const [form, setForm] = useState({ overall: 0, friends: '', classes: '', adultNote: '' })
+  const school = student.toSchool ? schools[student.toSchool].name : 'your new school'
+  const weeks = 'a couple of weeks'
+
+  if (saved) {
+    return (
+      <div className="survey-wrap">
+        <div className="card survey-card" style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 52 }}>💪</div>
+          <h2 style={{ margin: '8px 0' }}>Got it — thanks, {student.firstName}!</h2>
+          <p style={{ color: 'var(--ink-soft)', maxWidth: 420, margin: '0 auto' }}>
+            Your teachers and counselor can see your answers. If anything felt hard, someone will check
+            in with you — you don't have to figure out a new school all by yourself.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="survey-wrap">
+      <div className="card survey-card">
+        <h2 style={{ marginBottom: 4 }}>Hey {student.firstName}! 👋</h2>
+        <p style={{ color: 'var(--ink-soft)', marginBottom: 18 }}>
+          You've been at <b>{school}</b> for {weeks} now. Three quick questions — takes less than a
+          minute.
+        </p>
+        <div className="form-grid">
+          <div className="form-row">
+            <label className="survey-q">How is your new school going so far?</label>
+            <div className="emoji-picker">
+              {[4, 3, 2, 1].map((n) => (
+                <button key={n} type="button" className={form.overall === n ? 'sel' : ''}
+                  onClick={() => setForm((f) => ({ ...f, overall: n }))}>
+                  <span className="em">{CHECKIN_OVERALL[n].emoji}</span>
+                  {CHECKIN_OVERALL[n].label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="form-row">
+            <label className="survey-q">Have you found friends to sit with at lunch?</label>
+            <div className="chip-picker">
+              {['Yes!', 'Kind of', 'Not yet'].map((o) => (
+                <button key={o} type="button" className={form.friends === o ? 'sel' : ''}
+                  onClick={() => setForm((f) => ({ ...f, friends: o }))}>{o}</button>
+              ))}
+            </div>
+          </div>
+          <div className="form-row">
+            <label className="survey-q">How are your classes feeling?</label>
+            <div className="chip-picker">
+              {['Too easy', 'Just right', 'Too hard'].map((o) => (
+                <button key={o} type="button" className={form.classes === o ? 'sel' : ''}
+                  onClick={() => setForm((f) => ({ ...f, classes: o }))}>{o}</button>
+              ))}
+            </div>
+          </div>
+          <div className="form-row">
+            <label className="survey-q">Anything you want a teacher or counselor to know? <span className="hint">(optional)</span></label>
+            <textarea value={form.adultNote}
+              placeholder="Big or small — an adult will read this."
+              onChange={(e) => setForm((f) => ({ ...f, adultNote: e.target.value }))} />
+          </div>
+          <div>
+            <button className="btn primary" disabled={!form.overall || !form.friends || !form.classes}
+              onClick={() => { onSave(student.id, form); setSaved(true) }}>
+              Send my answers →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

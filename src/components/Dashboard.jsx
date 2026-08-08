@@ -1,6 +1,7 @@
 import { schools, studentName, nweaPending } from '../data/demoData.js'
 import StudentTable from './StudentTable.jsx'
 import TransferChecklist from './TransferChecklist.jsx'
+import { checkInFlags, CHECKIN_OVERALL } from './StudentVoice.jsx'
 
 function pct(n, d) {
   return d === 0 ? 0 : Math.round((n / d) * 100)
@@ -130,6 +131,59 @@ function DataSourcesCard({ students, onSyncNwea }) {
   )
 }
 
+/* ------------------------- New-student check-ins ------------------------- */
+function CheckInsCard({ students, onOpenStudent, incomingCount }) {
+  const withCheckIn = students.filter((s) => s.checkIn)
+  if (!withCheckIn.length && !incomingCount) return null
+
+  return (
+    <div className="card">
+      <h3>💬 New-student check-ins</h3>
+      <p className="card-sub">
+        Scheduled automatically two weeks after a student's first day — no one has to remember. Students
+        answer from their portal tile in under a minute; responses route to the homeroom teacher and
+        counselor, and concerning answers are flagged.
+      </p>
+      {withCheckIn.map((s) => {
+        const c = s.checkIn
+        const flags = c.status === 'completed' ? checkInFlags(c.responses) : []
+        const o = c.status === 'completed' ? CHECKIN_OVERALL[c.responses.overall] : null
+        return (
+          <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 0', borderBottom: '1px solid var(--line)' }}>
+            <div style={{ flex: 1 }}>
+              <span className="stu-name" style={{ cursor: 'pointer' }} onClick={() => onOpenStudent(s.id, 'voice')}>
+                {studentName(s)}
+              </span>{' '}
+              <span className="stu-meta">Grade {s.grade} · started {s.enrolledDate}</span>
+              {c.status === 'completed' && flags.length > 0 && (
+                <div className="stu-meta" style={{ color: 'var(--amber)', fontWeight: 600, marginTop: 2 }}>
+                  ⚑ {flags.join(' · ')}
+                </div>
+              )}
+            </div>
+            {c.status === 'completed' ? (
+              flags.length ? (
+                <span className="pill alert">⚑ Needs follow-up</span>
+              ) : (
+                <span className="pill ok">{o?.emoji} Doing well</span>
+              )
+            ) : (
+              <span className="pill warn">Due — waiting on student</span>
+            )}
+            <button className="btn ghost small" onClick={() => onOpenStudent(s.id, 'voice')}>View</button>
+          </div>
+        )
+      })}
+      {incomingCount > 0 && (
+        <p className="stu-meta" style={{ marginTop: 10 }}>
+          ⏱ {incomingCount} incoming 4th graders will get check-ins auto-scheduled two weeks after the
+          first day of school this fall.
+        </p>
+      )}
+    </div>
+  )
+}
+
 /* ------------------------- Counselor home ------------------------- */
 function CounselorHome({ user, students, onOpenStudent, onMarkStep, onSyncNwea }) {
   const incoming = students.filter((s) => s.cohort === 'incoming')
@@ -155,6 +209,8 @@ function CounselorHome({ user, students, onOpenStudent, onMarkStep, onSyncNwea }
         <div className="stat accent-amber"><div className="v">{needsAttention.length}</div><div className="l">Mid-year transfers in progress</div></div>
         <div className="stat accent-red"><div className="v">{outgoing.filter((s) => s.packetStatus !== 'sent').length}</div><div className="l">Outgoing packets not yet sent</div></div>
       </div>
+
+      <CheckInsCard students={midyear} onOpenStudent={onOpenStudent} incomingCount={incoming.length} />
 
       <DataSourcesCard students={students} onSyncNwea={onSyncNwea} />
 

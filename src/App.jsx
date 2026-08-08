@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard.jsx'
 import StudentProfile from './components/StudentProfile.jsx'
 import DisclosureLog from './components/DisclosureLog.jsx'
 import StandardsExplorer from './components/StandardsExplorer.jsx'
-import StudentSurveyPage from './components/StudentVoice.jsx'
+import StudentSurveyPage, { CheckInSurveyPage, checkInFlags } from './components/StudentVoice.jsx'
 
 const STORE_KEY = 'bridge-demo-v1'
 
@@ -34,6 +34,8 @@ export default function App() {
   const [route, setRoute] = useState({ view: 'home' })
   const [store, setStore] = useState(loadStore)
   const [toast, setToast] = useState(null)
+  // keeps the check-in thank-you screen mounted after submission flips it to 'completed'
+  const [checkInJustDone, setCheckInJustDone] = useState(false)
 
   const { students, auditLog } = store
 
@@ -156,6 +158,30 @@ export default function App() {
     showToast('Survey saved ✓')
   }
 
+  const saveCheckIn = (id, responses) => {
+    const s = students.find((x) => x.id === id)
+    const flags = checkInFlags(responses)
+    updateStudent(id, (st) => ({
+      ...st,
+      checkIn: {
+        ...st.checkIn,
+        status: 'completed',
+        completedDate: new Date().toISOString().slice(0, 10),
+        responses,
+      },
+    }))
+    addLog({
+      user: `${studentName(s)} (Student)`,
+      action: 'Two-week check-in completed',
+      student: studentName(s),
+      detail: flags.length
+        ? `Responses flagged for follow-up (${flags.join('; ')}) — routed to homeroom teacher and counselor automatically`
+        : 'Responses routed to homeroom teacher and counselor automatically',
+    })
+    showToast('Check-in saved ✓')
+    setCheckInJustDone(true)
+  }
+
   const syncNwea = () => {
     const today = new Date().toISOString().slice(0, 10)
     const affected = students.filter((s) => nweaPending[s.id] && !s.assessments?.nweaSyncedAt)
@@ -200,6 +226,7 @@ export default function App() {
   const signOut = () => {
     setUser(null)
     setRoute({ view: 'home' })
+    setCheckInJustDone(false)
   }
 
   const selectedStudent = useMemo(
@@ -213,9 +240,14 @@ export default function App() {
 
   if (user.role === 'student') {
     const me = students.find((s) => s.id === user.studentId)
+    // A due check-in takes over the student's view — one tap from the portal
+    // tile, answer, done. Otherwise they see their About Me survey.
+    const checkInDue = (me.checkIn && me.checkIn.status !== 'completed') || checkInJustDone
     return (
       <Layout user={user} route={route} onNav={() => {}} onSignOut={signOut} onReset={resetDemo}>
-        <StudentSurveyPage student={me} onSave={saveStudentVoice} />
+        {checkInDue
+          ? <CheckInSurveyPage student={me} onSave={saveCheckIn} />
+          : <StudentSurveyPage student={me} onSave={saveStudentVoice} />}
         {toast && <div className="toast">{toast}</div>}
       </Layout>
     )

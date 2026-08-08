@@ -4,7 +4,7 @@ import { Flags, ProfilePill } from './StudentTable.jsx'
 import TeacherProfileForm from './TeacherProfileForm.jsx'
 import StandardsComparison from './StandardsComparison.jsx'
 import TransferChecklist from './TransferChecklist.jsx'
-import { StudentVoiceView, FEELINGS } from './StudentVoice.jsx'
+import { StudentVoiceView, CheckInView, FEELINGS } from './StudentVoice.jsx'
 
 function Dots({ n }) {
   return (
@@ -337,10 +337,16 @@ export default function StudentProfile({ student, user, initialTab, onBack, onSa
 
       {tab === 'assessments' && <AssessmentsTab student={student} />}
       {tab === 'voice' && (
-        <div className="card">
-          <h3>Student voice — the "About Me" survey</h3>
-          <StudentVoiceView student={student} />
-        </div>
+        <>
+          <div className="card">
+            <h3>Student voice — the "About Me" survey</h3>
+            <StudentVoiceView student={student} />
+          </div>
+          <div className="card">
+            <h3>Two-week check-in</h3>
+            <CheckInView student={student} />
+          </div>
+        </>
       )}
       {tab === 'supports' && <SupportsTab student={student} user={user} />}
       {tab === 'standards' && student.priorState && (
