@@ -4,6 +4,7 @@ import { Flags, ProfilePill } from './StudentTable.jsx'
 import TeacherProfileForm from './TeacherProfileForm.jsx'
 import StandardsComparison from './StandardsComparison.jsx'
 import TransferChecklist from './TransferChecklist.jsx'
+import { StudentVoiceView, FEELINGS } from './StudentVoice.jsx'
 
 function Dots({ n }) {
   return (
@@ -217,6 +218,7 @@ export default function StudentProfile({ student, user, initialTab, onBack, onSa
     { key: 'overview', label: 'Overview' },
     { key: 'academics', label: 'Teacher profile' },
     { key: 'assessments', label: 'Assessments' },
+    { key: 'voice', label: 'Student voice 💬' },
     { key: 'supports', label: 'Supports 🔒' },
   ]
   if (student.priorState) tabs.push({ key: 'standards', label: `Standards: ${student.priorState} → MI` })
@@ -274,6 +276,17 @@ export default function StudentProfile({ student, user, initialTab, onBack, onSa
               {student.teacherProfile.whatWorks}
             </div>
           )}
+          {student.studentVoice && (
+            <div className="note-block mt12" style={{ borderLeftColor: 'var(--violet)' }}>
+              <div className="nb-label">
+                In {student.firstName}'s own words {FEELINGS[student.studentVoice.feeling]?.emoji} {FEELINGS[student.studentVoice.feeling]?.label.toLowerCase()} about the move
+              </div>
+              {student.studentVoice.teachersShouldKnow || student.studentVoice.excited}
+              {student.studentVoice.nervous && (
+                <div className="stu-meta" style={{ marginTop: 4 }}>Nervous about: {student.studentVoice.nervous}</div>
+              )}
+            </div>
+          )}
           {student.priorState && (
             <div className="callout warn mt12" style={{ marginBottom: 0 }}>
               <b>Out-of-state arrival:</b> {student.firstName} comes from a state with different academic
@@ -323,6 +336,12 @@ export default function StudentProfile({ student, user, initialTab, onBack, onSa
       )}
 
       {tab === 'assessments' && <AssessmentsTab student={student} />}
+      {tab === 'voice' && (
+        <div className="card">
+          <h3>Student voice — the "About Me" survey</h3>
+          <StudentVoiceView student={student} />
+        </div>
+      )}
       {tab === 'supports' && <SupportsTab student={student} user={user} />}
       {tab === 'standards' && student.priorState && (
         <StandardsComparison stateCode={student.priorState} student={student} />

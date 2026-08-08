@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard.jsx'
 import StudentProfile from './components/StudentProfile.jsx'
 import DisclosureLog from './components/DisclosureLog.jsx'
 import StandardsExplorer from './components/StandardsExplorer.jsx'
+import StudentSurveyPage from './components/StudentVoice.jsx'
 
 const STORE_KEY = 'bridge-demo-v1'
 
@@ -140,6 +141,21 @@ export default function App() {
     showToast(`${labels[stepKey] || 'Updated'} — ${studentName(s)}`)
   }
 
+  const saveStudentVoice = (id, voice) => {
+    const s = students.find((x) => x.id === id)
+    updateStudent(id, (st) => ({
+      ...st,
+      studentVoice: { ...voice, completedDate: new Date().toISOString().slice(0, 10) },
+    }))
+    addLog({
+      user: `${studentName(s)} (Student)`,
+      action: 'About Me survey completed',
+      student: studentName(s),
+      detail: 'Student voice responses added to their own transition profile',
+    })
+    showToast('Survey saved ✓')
+  }
+
   const syncNwea = () => {
     const today = new Date().toISOString().slice(0, 10)
     const affected = students.filter((s) => nweaPending[s.id] && !s.assessments?.nweaSyncedAt)
@@ -193,6 +209,16 @@ export default function App() {
 
   if (!user) {
     return <Login personas={personas} onLogin={(p) => { setUser(p); setRoute({ view: 'home' }) }} />
+  }
+
+  if (user.role === 'student') {
+    const me = students.find((s) => s.id === user.studentId)
+    return (
+      <Layout user={user} route={route} onNav={() => {}} onSignOut={signOut} onReset={resetDemo}>
+        <StudentSurveyPage student={me} onSave={saveStudentVoice} />
+        {toast && <div className="toast">{toast}</div>}
+      </Layout>
+    )
   }
 
   return (

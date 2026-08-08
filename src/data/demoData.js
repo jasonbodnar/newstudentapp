@@ -61,6 +61,17 @@ export const personas = [
       'Counselor at Riverside. Reviews the incoming 4th-grade cohort, attaches state testing data, and manages mid-year transfer records.',
   },
   {
+    id: 'malik',
+    name: 'Malik',
+    fullName: 'Malik Turner',
+    role: 'student',
+    roleLabel: 'Student',
+    school: 'maple',
+    studentId: 's02',
+    description:
+      'Student view — a 4th grader at Maple headed to Riverside. Completes a short "About Me" survey that becomes part of his transition profile.',
+  },
+  {
     id: 'patel',
     name: 'Dr. Patel',
     fullName: 'Sunita Patel',
@@ -145,6 +156,16 @@ export const initialStudents = [
       attendance: { rate: 97, absences: 5, tardies: 1 },
     },
     supports: { iep: false, plan504: false, el: false, summary: null },
+    studentVoice: {
+      completedDate: '2026-05-20',
+      feeling: 4,
+      excited: "The bigger library! And getting to switch classes — it feels more grown up.",
+      nervous: "Getting lost trying to find my classroom on the first day.",
+      teachersShouldKnow: "I love picking my own books. Reading logs where we all read the same thing are boring for me.",
+      proudOf: "I wrote a 40-page story this year and read it to the class.",
+      learnBest: ['A quiet space', 'Working alone', 'With one partner'],
+      favoriteSubjects: ['Reading', 'Writing'],
+    },
     priorState: null,
   },
   {
@@ -311,6 +332,16 @@ export const initialStudents = [
       el: false,
       summary:
         'IEP — Specific Learning Disability (reading). Accommodations: audio texts, extended time, reduced reading load on assessments, speech-to-text for writing. Annual review scheduled Oct 2026. Case manager: J. Whitfield.',
+    },
+    studentVoice: {
+      completedDate: '2026-05-22',
+      feeling: 2,
+      excited: "STEM class and recess. I heard 5th grade builds rockets.",
+      nervous: "Reading out loud in front of kids I don't know.",
+      teachersShouldKnow: "Please don't call on me to read out loud without letting me practice first. I'm really good at building and fixing things.",
+      proudOf: "I fixed my neighbor's bike chain and brakes all by myself.",
+      learnBest: ['Hands-on projects', 'Moving around', 'Extra time to finish'],
+      favoriteSubjects: ['Science', 'Math', 'PE'],
     },
     priorState: null,
   },
@@ -560,6 +591,16 @@ export const initialStudents = [
     toSchool: 'riverside',
     homeroom: 'Unassigned',
     enrolledDate: '2026-01-12',
+    studentVoice: {
+      completedDate: '2026-01-22',
+      feeling: 3,
+      excited: "Making new friends. I've moved before so I know how to do this part.",
+      nervous: "Being behind in math because we moved in the middle of a unit. I don't want kids to think I'm not smart.",
+      teachersShouldKnow: "This is my third school in three years. I'm okay, but it helps when a teacher checks in with me the first week.",
+      proudOf: "Being brave. Moving is hard and I keep doing it.",
+      learnBest: ['With one partner', 'Seeing examples first'],
+      favoriteSubjects: ['Writing', 'Art'],
+    },
     priorState: 'OH',
     transfer: {
       steps: {

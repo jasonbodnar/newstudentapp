@@ -345,6 +345,25 @@ table.roster tr.clickable:hover td { background: var(--brand-soft); }
 .audit-item .a-action { font-weight: 700; }
 .audit-item .a-detail { color: var(--ink-soft); font-size: 13px; }
 
+/* ---------- student survey ---------- */
+.survey-wrap { max-width: 680px; margin: 0 auto; }
+.survey-card { padding: 28px; }
+.survey-q { font-size: 15px; }
+.emoji-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+.emoji-picker button {
+  border: 2px solid var(--line); background: #fff; border-radius: 12px;
+  padding: 10px 14px; font-size: 13.5px; font-weight: 700; color: var(--ink-soft);
+  display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 104px;
+}
+.emoji-picker button .em { font-size: 26px; }
+.emoji-picker button.sel { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
+.chip-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip-picker button {
+  border: 1.5px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 8px 14px; font-size: 13.5px; font-weight: 600; color: var(--ink-soft);
+}
+.chip-picker button.sel { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); font-weight: 800; }
+
 /* ---------- misc ---------- */
 .progressbar { height: 8px; border-radius: 999px; background: #e8ecf3; overflow: hidden; }
 .progressbar > i { display: block; height: 100%; border-radius: 999px; background: var(--brand); }

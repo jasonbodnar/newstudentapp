@@ -1,7 +1,7 @@
 import { schools } from '../data/demoData.js'
 
 export default function Layout({ user, route, onNav, onSignOut, onReset, children }) {
-  const navItems = [
+  const navItems = user.role === 'student' ? [] : [
     { key: 'home', label: 'Home' },
     { key: 'standards', label: 'Standards Comparison' },
     { key: 'ferpa', label: 'Disclosure Log' },
